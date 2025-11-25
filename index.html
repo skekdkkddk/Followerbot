@@ -1,184 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xeno Download</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
-  body {
-    background:#0a0a0f;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    color:white;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloxBotting Download</title>
 
-  canvas {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index:-3;
-  }
+    <style>
+        body {
+            background: #0b0b0b;
+            color: #fff;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding-top: 150px;
+        }
 
-  .container { 
-    max-width:480px; 
-    width:90%; 
-    text-align:center; 
-    z-index:1; 
-    position:relative; 
-  }
+        .hidden {
+            display: none;
+        }
 
-  /* Avatar/logo with neon glow */
-  .logo-wrapper {
-    position: relative;
-    width:120px;
-    height:120px;
-    margin:0 auto 25px;
-  }
-  .logo-wrapper::before {
-    content:'';
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%, -50%);
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(0,255,250,0.35), transparent 60%);
-    filter:blur(20px);
-    z-index:-1;
-  }
-  .logo {
-    width:120px;         
-    height:120px;
-    display:block;
-    border-radius:50%;
-    border:3px solid #00fffaff;
-    box-shadow:0 0 25px #00fffaff, 0 0 50px #00fffaaa;
-    object-fit:cover;
-    animation: floatLogo 3s ease-in-out infinite;
-    background:#001f24;
-  }
-  @keyframes floatLogo {
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-5px); }
-  }
+        a.download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
 
-  /* Card with gradient glass effect */
-  .card {
-    background: linear-gradient(145deg, rgba(0,0,0,0.6), rgba(10,10,20,0.85));
-    border-radius:24px;
-    padding:40px 30px 50px;
-    backdrop-filter: blur(22px);
-    border:1px solid rgba(0,255,250,0.15);
-    box-shadow:0 0 50px rgba(0,255,250,0.25);
-    position: relative;
-    transition: 0.3s ease;
-  }
-  .card:hover {
-    box-shadow:0 0 70px rgba(0,255,250,0.4);
-  }
-
-  .card h1 { font-size:2.2rem; font-weight:700; margin-bottom:14px; }
-  .version { font-size:1.1rem; opacity:0.85; margin-bottom:28px; }
-  .btn {
-    display:block; width:100%; padding:16px 0; border-radius:45px;
-    font-weight:700; font-size:1.15rem;
-    background: linear-gradient(90deg, #00f0d5, #00c7ff);
-    color:#021011; text-decoration:none;
-    box-shadow:0 0 30px #00fffaaa;
-    transition:0.25s;
-  }
-  .btn:hover { transform:scale(1.04); box-shadow:0 0 50px #00fffebf; }
-
-  .changelog {
-    margin-top:32px; background: rgba(255,255,255,0.02);
-    border-radius:16px; padding:22px;
-    border:1px solid rgba(255,255,255,0.06);
-    text-align:left; font-size:1rem; color:#d0fff9;
-  }
-  .changelog h2 { font-weight:600; margin-bottom:14px; font-size:1.3rem; }
-  .changelog ul { list-style:none; padding-left:0; }
-  .changelog li { position:relative; padding-left:26px; margin-bottom:8px; opacity:0.85; }
-  .changelog li::before { content:"✔"; position:absolute; left:4px; top:0; color:#00ffe3; font-weight:700; font-size:1.15rem; }
-
-</style>
+        a.download-btn:hover {
+            background: #005fcc;
+        }
+    </style>
 </head>
 <body>
 
-<canvas id="particleCanvas"></canvas>
+    <h1>Preparing Your Download...</h1>
+    <p>Please wait <span id="seconds">3</span> seconds.</p>
 
-<div class="container">
-  <div class="logo-wrapper">
-    <img class="logo" src="/mnt/data/IMG_22312222.png" alt="Avatar" />
-  </div>
-  <div class="card">
-    <h1>Xeno Download</h1>
-    <div class="version">Latest Version: <strong>1.2.85</strong></div>
-    <a href="#" class="btn">Download</a>
-    <div class="changelog">
-      <h2>What's New</h2>
-      <ul>
-        <li>Major UI performance improvements</li>
-        <li>Crash fixes & memory cleanup</li>
-        <li>Backend SSL upgraded</li>
-        <li>Injection engine optimized</li>
-      </ul>
+    <div id="downloadSection" class="hidden">
+        <a class="download-btn" href="/mnt/data/Reap-v1.3.0a.exe" download>
+            Download Now
+        </a>
     </div>
-  </div>
-</div>
 
-<script>
-const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
+    <script>
+        let sec = 3;
+        const counter = document.getElementById("seconds");
+        const section = document.getElementById("downloadSection");
 
-let width = canvas.width = window.innerWidth;
-let height = canvas.height = window.innerHeight;
+        const timer = setInterval(() => {
+            sec--;
+            counter.textContent = sec;
 
-const particles = [];
-const particleCount = 90;
-
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random()*width;
-    this.y = Math.random()*height;
-    this.size = Math.random()*2 + 1;
-    this.speedY = Math.random()*0.25 + 0.1;
-    this.speedX = (Math.random()-0.5)*0.1;
-    this.opacity = Math.random()*0.45 + 0.15;
-  }
-  update() {
-    this.y -= this.speedY;
-    this.x += this.speedX;
-    if(this.y < 0 || this.x < 0 || this.x > width) this.reset();
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(0, 255, 250, ${this.opacity})`;
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx.fill();
-  }
-}
-
-for(let i=0;i<particleCount;i++) particles.push(new Particle());
-
-function animate() {
-  ctx.fillStyle='rgba(10,10,15,0.15)';
-  ctx.fillRect(0,0,width,height);
-  for(let p of particles){ p.update(); p.draw(); }
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-window.addEventListener('resize', () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-});
-</script>
+            if (sec <= 0) {
+                clearInterval(timer);
+                section.classList.remove("hidden");
+                counter.parentElement.textContent = "Your download is ready:";
+            }
+        }, 1000);
+    </script>
 
 </body>
 </html>
